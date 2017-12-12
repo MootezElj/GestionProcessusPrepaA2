@@ -1,0 +1,55 @@
+var model={
+    user:"Prepa A2",
+    matieres:[{nom:"mathematique de signal",note:0,coeif:2,somme:0},
+    {nom:"Proba & stat",note:0,coeif:2,somme:0},
+    {nom:"Archi",note:0,coeif:2,somme:0},
+    {nom:"Poo",note:0,coeif:2,somme:0},
+    {nom:"Atelier c++",note:0,coeif:2,somme:0},
+    {nom:"SE",note:0,coeif:2,somme:0},
+    {nom:"BD",note:0,coeif:2,somme:0},
+    {nom:"Tech Transmission",note:0,coeif:2,somme:0},
+    {nom:"Culture d'entreprise",note:0,coeif:1,somme:0},
+    {nom:"Fr",note:0,coeif:1,somme:0},
+    {nom:"Anglais",note:0,coeif:1,somme:0},
+    {nom:"Atelier Mathlab",note:0,coeif:2,somme:0}],
+     
+    };
+    
+var todoApp=angular.module("todoApp",[]);
+todoApp.controller("ToDoCtrl",function ($scope){
+   
+   $scope.valide=function(matiere)
+   {
+    return((matiere.note<=20)&&(matiere.note>=0))
+   }
+   $scope.calculermoyenne= function ()
+    {
+        var sommeDesMoyenne =0.0;
+        var sommeCoeif=0;
+        for (var i=0;i<model.matieres.length;i++)
+        {
+            sommeDesMoyenne+=model.matieres[i].note*model.matieres[i].coeif;
+            sommeCoeif+=model.matieres[i].coeif*1;
+            model.matieres[i].somme+=model.matieres[i].note*model.matieres[i].coeif;
+        }
+        return(sommeDesMoyenne/sommeCoeif);
+    }
+    
+    $scope.calculerSomme=function(matiere)
+    {
+        if ($scope.valide(matiere))
+       return(matiere.note*matiere.coeif); 
+       else
+       alert("champ invalide");
+    }
+    $scope.trColor=function(matiere)
+    {
+        if (matiere.note<8)
+        return "danger";
+        else if(matiere.note>15)
+        return "succes";
+        else return "info";
+    }
+    $scope.todo=model;
+})
+

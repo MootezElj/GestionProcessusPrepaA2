@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+    <title>Gestion Processus</title>
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="Footer-white.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="angular.js"></script>
+    <script src="javascript.js">
+   </script>
+</head>
+
+<body ng-controller="ToDoCtrl">
+    <h1><span class="blue">&lt;</span>Prepa A2<span class="blue">&gt;</span> <span class="yellow">Gestion Processus</pan></h1>
+        <div class="container">
+            <div class="col-xs-12">
+                <label><h4>nom du processus</h4>
+                <input class="form-control" ng-model="nomProcessus"/>
+                </label>
+                <label><h4>temps d'&eacutexecution</h4>
+                <input class="form-control" ng-model="tempExecution"/>
+                </label>
+                <label><h4>date d'arriv&eacutee</h4>
+                <input class="form-control" ng-model="dateArrivee"/>
+                </label>
+                <div ng-hide="!todo.prioriteeNeeded">
+                <label><h4>Priorit&eacutee </h4>
+                    <input class="form-control" ng-model="prioritee"/>
+                    </label>
+                </div>
+                <button class="btn btn-default" ng-click="ajouterProcessus(nomProcessus,tempExecution,dateArrivee,prioritee)">Ajouter</button>
+                <span><h5>Cliquer pour Afficher la priortee</h5>
+                <input class="btn btn-default"  ng-model="todo.prioriteeNeeded"  type="checkbox">
+            </span>
+            </div>
+            <!-- 23/11/2017 --
+            <div class="col-xs-6">
+                <label><h4>priorite</h4>
+                    <input type="checkbox" class="form-control" ng-model="prioriteNeededM" />
+                </label>
+            </div>
+        -->
+        </div>
+        <table class="container"> 
+            <thead>
+                <tr>
+                    <th>nom du processeus</h1></th>
+                    <th>Temps d'&eacutexecution</th>
+                    <th>Date d'arriv&eacutee</th>
+                    <th ng-hide="!todo.prioriteeNeeded">priorit&eacutee</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>      
+             <tr ng-repeat="proces in todo.processusList">  
+                <td><h4> {{proces.nomProcessus}}</h4></td>
+                <td><h4>{{proces.tempExecution}}</h4></td>
+                <td><h4>{{proces.dateArrivee}}</h4></td>
+                <td ng-hide="!todo.prioriteeNeeded" ><h4>{{proces.priorite}}</h4></td> 
+                <td ng-click="effacerProcessus(proces)"><h4><div class="remove">x</div></h4></td>
+                </tr>
+            </tbody>
+          
+        </table class="container">
+
+
+      <p>  
+    <div class="container">
+        <div>
+            <label>
+                <button class="btn btn-default" ng-click="sjfDiagrame()"><a href="#SJF">SJF</a></button>
+            </label>
+        
+        
+            <label>
+                <button class="btn btn-default" ng-click="getReady(0,todo.processusList)">RR</button>
+            </label>
+            
+            <label>
+                <button class="btn btn-default">Prioritee</button>
+            </label>
+        </div>
+    </div></p>
+  <div >
+
+  </div>
+    <div  ng-hide="!usedFunctions.sjf">
+    <h1  id='SJF'> SJF </h1>
+   
+    <table class="container" ng-hide="!usedFunctions.sjf"> 
+            <thead>
+                    <tr>
+                        <th>Debut</h1></th>
+                        <th>Nom</th>
+                        <th>Fin</th>
+                    </tr>
+                </thead>
+            <tbody>
+                <tr ng-repeat="proces in sjfTodo">  
+                    <td><h4>{{proces.debutExecution}}</h4></td>
+                    <td><h4>{{proces.nomProcessus}}</h4></td>
+                    <td><h4>{{proces.finExecution}}</h4></td>
+                    
+                    </tr>
+                </tbody>
+        </table>
+        <div class="container">
+        <!-- 27/11/2017 tous marche bien !!-->>
+            <div><h2> Temp d'execution Moyen:</h2>
+                <h3>{{chaineTempExecutionMoeyenTodo}}
+               {{tempExecutionMoyenNumberTodo}}</h3></div>
+        
+        </div>
+    </div>
+    <footer id="myFooter">
+        <div class="container">
+        </div>
+        <div class="footer-social">
+            <a href="https://www.facebook.com/mootez.elj" class="social-icons"><i class="fa fa-facebook"></i></a>
+            <p class="footer-copyright"> Copyright &copy 2017-Site de gestion de processus -Develop&eacutee par &copy Mootez Elj</p>
+        </div>
+    </footer>
+</body>
+
+
+
+</html>
